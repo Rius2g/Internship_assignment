@@ -1,3 +1,5 @@
+namespace speed {
+
 class Speed: IFormattble {
     private int speed;
     private string format; //need to store the format as well
@@ -9,11 +11,12 @@ class Speed: IFormattble {
         format = "m/s"; //standard format
     }
     
-    public change_format(string _format) {
-        if (_format != "m/s" && _format != "knots") {
-            throw new System.ArgumentException("Format must be either m/s or knots");
+    public change_format() {
+        if (format == "m/s") {
+            format = "knots";
+        } else {
+            format = "m/s";
         }
-        format = _format;
     }
 
     public string ToString(string format) {
@@ -25,6 +28,9 @@ class Speed: IFormattble {
         }
     }
 }
+}
+
+namespace vessels {
 class Vessel {
     private string name;
     private string yearBuilt;
@@ -59,66 +65,96 @@ class Vessel {
         speed = new Speed(0);
     }
 
-    public string GetName()
+    public string GetName() 
     {
         return name;
     }
 
-    public string GetYearBuilt()
+    public string GetYearBuilt() 
     {
         return yearBuilt;
     }
 
-    public string GetType()
+    public string GetType() //function to return the type
     {
         return type;
     }
 
-    public void GetVesselInfo(string propertyName, int propertyValue)
+    public void GetVesselInfo()
     {
-        Console.WriteLine($"Name: {name}");
-        Console.WriteLine($"Year Built: {yearBuilt}");
-        Console.WriteLine($"Type: {type}");
-        Console.WriteLine($"{propertyName}: {propertyValue}");
+        Console.WriteLine($"Name: {GetName()}");
+        Console.WriteLine($"Year Built: {GetYearBuilt()}");
+        Console.WriteLine($"Type: {GetType()}");
     }
     
-
     public override string ToString() {
         return $"Vessel: {name}";
     }
 
-
-}
+    }
 
 class Ferry : Vessel {
-    public int Passengers;
+    public int Passengers; //new info
 
-    public Ferry(string Name, string Year, int Passengers) : base(Name, Year, "Ferry")
+//inherit the base class and set all Ferry class objects to Ferry typ
+    public Ferry(string Name, string Year, int Passengers) : base(Name, Year, "Ferry") 
     {
-        Passengers = Passengers;
+        Passengers = Passengers; //set the new info
     }
-}
+
+    public int GetPassengers() //function to return the new info
+    {
+        return Passengers;
+    }
+
+    public void GetVesselInfo() //simply inherit the base function and add the new info
+    {
+        base.GetVesselInfo(); //inherit the base function
+        Console.WriteLine($"Passengers: {GetPassengers()}"); //add the new info
+    }
+
+    }
 
 class Tugboat : Vessel {
-    private int maxForce;
+    private int maxForce; //new info
 
     public Tugboat(string Name, string Year, int MaxForce) : base(Name, Year, "Tugboat")
     {
-        maxForce = MaxForce;
+        maxForce = MaxForce; //set the new info
     }
-}
+
+    public int GetMaxForce() //function to return the new info
+    {
+        return maxForce;
+    }
+
+    public void GetVesselInfo() //simply inherit the base function and add the new info
+    {
+        base.GetVesselInfo(); //inherit the base function
+        Console.WriteLine($"Max Force: {GetMaxForce()}"); //add the new info
+    }
+
+    }
 
 class submarine: Vessel {
-    private int maxDepth;
+    private int maxDepth; //new info
 
     public submarine(string Name, string Year, int MaxDepth) : base(Name, Year, "Submarine")
     {
-        maxDepth = MaxDepth;
+        maxDepth = MaxDepth; //set the new info
+    }
+
+    public int GetMaxDepth() //function to return the new info
+    {
+        return maxDepth;
+    }
+
+    public void GetVesselInfo() //simply inherit the base function and add the new info
+    {
+        base.GetVesselInfo(); //inherit the base function
+        Console.WriteLine($"Max Depth: {GetMaxDepth()}"); //add the new info to the function
+    }
+
     }
 
 }
-
-
-
-
-
