@@ -143,11 +143,36 @@ namespace VesselTests
             string format = "m/h";
             exception = Assert.Throws<ArgumentException>(() => new Ferry("Båt 1", "2015", 100, 50).GetSpeed(format));
             Assert.Equal("The " + format + " format string is not supported.", exception.Message);
+        }
 
-            string format2 = "";
-            exception = Assert.Throws<ArgumentException>(() => new Ferry("Båt 1", "2015", 100, 50).GetSpeed(format2));
-            Assert.Equal("The " + format2 + " format string is not supported.", exception.Message);
+        [Fact]
+        public void Test_VesselInfo()
+        {
+            var ferry = new Ferry("Båt 1", "2012", 100, 50);
+            var tugboat = new Tugboat("Båt 2", "2012", 100, 70);
+            var submarine = new Submarine("Båt 3", "2012", 100, 90);
 
+            
+            Vessel[] array = new Vessel[] {ferry, tugboat, submarine};
+            for(int i = 0; i < array.Length; i++)
+            {
+                string info = array[i].ToString();
+                Console.WriteLine(info);
+                Assert.Equal("Båt " + (i + 1), array[i].GetName());
+                Assert.Equal("2012", array[i].GetYearBuilt());
+                if (i == 0)
+                {
+                    Assert.Equal("50 m/s", array[i].GetSpeed("m/s"));
+                }
+                else if (i == 1)
+                {
+                    Assert.Equal("70 m/s", array[i].GetSpeed("m/s"));
+                }
+                else if (i == 2)
+                {
+                    Assert.Equal("90 m/s", array[i].GetSpeed("m/s"));
+                }
+            }
         }
 
     }

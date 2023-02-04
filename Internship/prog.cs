@@ -101,13 +101,11 @@ class Vessel {
 
     public virtual void GetVesselInfo()
     {
-        Console.WriteLine($"Name: {GetName()}");
-        Console.WriteLine($"Year Built: {GetYearBuilt()}");
-        Console.WriteLine($"Type: {GetType()}");
+        Console.WriteLine(ToString());
     }
     
     public override string ToString() {
-        return $"Vessel: {_name}";
+        return $"Vessel: [{_name}] Year Built: [{_yearBuilt}] Type: [{_type}] Speed: [{_speed}]";
     }
 
     }
@@ -126,10 +124,9 @@ class Ferry : Vessel {
         return Passengers;
     }
 
-    public override void GetVesselInfo() //simply inherit the base function and add the new info
-    {
-        base.GetVesselInfo(); //inherit the base function
-        Console.WriteLine($"Passengers: {GetPassengers()}"); //add the new info
+    public override string ToString()
+    {        //inherit the base function
+        return $"{base.ToString()} Passengers: [{Passengers}]"; //add the new info
     }
 
     }
@@ -147,10 +144,9 @@ class Tugboat : Vessel {
         return _maxForce;
     }
 
-    public override void GetVesselInfo() //simply inherit the base function and add the new info
+    public override string ToString()
     {
-        base.GetVesselInfo(); //inherit the base function
-        Console.WriteLine($"Max Force: {GetMaxForce()}"); //add the new info
+        return $"{base.ToString()} MaxForce: [{_maxForce}]"; //add the new info
     }
 
     }
@@ -168,10 +164,9 @@ class Submarine: Vessel {
         return _maxDepth;
     }
 
-    public override void GetVesselInfo() //simply inherit the base function and add the new info
-    {
-        base.GetVesselInfo(); //inherit the base function
-        Console.WriteLine($"Max Depth: {GetMaxDepth()}"); //add the new info to the function
+    public override string ToString()
+    {    //inherit the base function
+        return $"{base.ToString()} Max Depth: [{_maxDepth}] "; //add the new info
     }
 
     }
