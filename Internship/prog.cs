@@ -28,6 +28,7 @@ class Speed: IFormattable {
         return this.ToString(format, CultureInfo.CurrentCulture);
     }
 
+    //basic stuff, following C# docs
     public string ToString(string format, IFormatProvider provider) {
         if(String.IsNullOrEmpty(format)) {
             format = "m/s";
@@ -54,8 +55,8 @@ class Vessel {
     private Speed _speed;
 
     public Vessel(string name, string year, string type, int speed)
-    {
-
+    { 
+        //need to check if the year/name/type is valid if not throw an exception
         var currentYear = DateTime.Now.Year;
         if (String.IsNullOrEmpty(name))
         {
@@ -73,38 +74,40 @@ class Vessel {
         {
             throw new ArgumentException("Type cannot be null or empty");
         }
+        //set the info since it is valid
         _name = name;
         _yearBuilt = year;
         _type = type;
         _speed = new Speed(speed);
     }
 
-    public string GetName() 
+    public string GetName() //returns the name of the vessel need this because the name is private
     {
         return _name;
     }
 
-    public string GetYearBuilt()
+    public string GetYearBuilt() //returns the year the vessel was built because the year is private
     {
         return _yearBuilt;
     }
 
-    public string GetVesselType()
+    public string GetVesselType() //returns the type of vessel because the type is private
     {
         return _type;
     }
 
-    public string GetSpeed(string format)
+    public string GetSpeed(string format) //returns the speed of the vessel because the speed is private
     {
         return _speed.ToString(format);
     }
 
-    public virtual void GetVesselInfo()
+    public virtual void GetVesselInfo() //prints out all the info from th ToString function
     {
         Console.WriteLine(ToString());
     }
     
-    public override string ToString() {
+    public override string ToString() //returns all the info about the vessel
+    { 
         return $"Vessel: [{_name}] Year Built: [{_yearBuilt}] Type: [{_type}] Speed: [{_speed}]";
     }
 
@@ -113,7 +116,7 @@ class Vessel {
 class Ferry : Vessel {
     public int Passengers; //new info
 
-//inherit the base class and set all Ferry class objects to Ferry typ
+//inherit the base class and set all Ferry class objects to Ferry type
     public Ferry(string name, string year, int passengers, int speed) : base(name, year, "Ferry", speed) 
     {
         Passengers = passengers; //set the new info
@@ -126,7 +129,7 @@ class Ferry : Vessel {
 
     public override string ToString()
     {        //inherit the base function
-        return $"{base.ToString()} Passengers: [{Passengers}]"; //add the new info
+        return $"{base.ToString()} Passengers: [{Passengers}]"; //add the new info to the base function
     }
 
     }
@@ -134,7 +137,8 @@ class Ferry : Vessel {
 class Tugboat : Vessel {
     private int _maxForce; //new info
 
-    public Tugboat(string name, string year, int maxForce, int speed) : base(name, year, "Tugboat", speed)
+    //constructor to set the new info with type as Tugboat set in stone.
+    public Tugboat(string name, string year, int maxForce, int speed) : base(name, year, "Tugboat", speed) 
     {
         _maxForce = maxForce; //set the new info
     }
@@ -144,9 +148,10 @@ class Tugboat : Vessel {
         return _maxForce;
     }
 
+
     public override string ToString()
     {
-        return $"{base.ToString()} MaxForce: [{_maxForce}]"; //add the new info
+        return $"{base.ToString()} MaxForce: [{_maxForce}]"; //add the new info to the base function 
     }
 
     }
@@ -154,19 +159,21 @@ class Tugboat : Vessel {
 class Submarine: Vessel {
     private int _maxDepth; //new info
 
+    //constructor to set the new info with type as Submarine set in stone.
     public Submarine(string name, string year, int maxDepth, int speed) : base(name, year, "Submarine", speed)
     {
         _maxDepth = maxDepth; //set the new info
     }
 
-    public int GetMaxDepth() //function to return the new info
+    public int GetMaxDepth() //function to return the new info, need this since the info is private
     {
         return _maxDepth;
     }
 
+
     public override string ToString()
     {    //inherit the base function
-        return $"{base.ToString()} Max Depth: [{_maxDepth}] "; //add the new info
+        return $"{base.ToString()} Max Depth: [{_maxDepth}] "; //add the new info to the base function
     }
 
     }

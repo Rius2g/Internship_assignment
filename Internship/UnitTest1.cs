@@ -146,7 +146,7 @@ namespace VesselTests
         }
 
         [Fact]
-        public void Test_VesselInfo()
+        public void Test_VesselInfo() //creates 3 different vessels and tests their info
         {
             var ferry = new Ferry("Båt 1", "2012", 100, 50);
             var tugboat = new Tugboat("Båt 2", "2012", 100, 70);
@@ -156,8 +156,7 @@ namespace VesselTests
             Vessel[] array = new Vessel[] {ferry, tugboat, submarine};
             for(int i = 0; i < array.Length; i++)
             {
-                string info = array[i].ToString();
-                Console.WriteLine(info);
+                Console.WriteLine(array[i].ToString());
                 Assert.Equal("Båt " + (i + 1), array[i].GetName());
                 Assert.Equal("2012", array[i].GetYearBuilt());
                 if (i == 0)
